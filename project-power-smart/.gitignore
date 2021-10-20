@@ -8,10 +8,10 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-<<<<<<< HEAD
-=======
 
->>>>>>> 6d8e76ac684ea1cc8c7766935b2d7c27adffb961
+# macOS
+.DS_Store
+
 # Intellij
 *.iml
 .idea/workspace.xml
@@ -19,9 +19,5 @@ web-build/
 .idea/gradle.xml
 .idea/dictionaries
 .idea/libraries
-<<<<<<< HEAD
-=======
 
->>>>>>> 6d8e76ac684ea1cc8c7766935b2d7c27adffb961
-# macOS
-.DS_Store
+
