@@ -8,6 +8,12 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+# Intellij
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/dictionaries
+.idea/libraries
 # macOS
 .DS_Store
