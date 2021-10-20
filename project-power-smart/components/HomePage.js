@@ -17,7 +17,7 @@ const INITIAL_STATE = [
 const whiteStyle = {
     axis: { stroke: "gray" },
     axisLabel: { fontSize: 20, padding: 30, fill: "gray" },
-    ticks: { stroke: "white", size: 5, },
+    ticks: { stroke: "gray", size: 5, },
     tickLabels: { fontSize: 15, padding: 5, fill: "gray" }
 }
 
@@ -38,16 +38,6 @@ export default class homePage extends React.Component{
     }
     addNewElement = () =>
     {
-        {/*const newEntry = {
-            x : index,
-            y : val,
-        }
-        const newData = [
-            ...this.state.chartData.slice(0, index + 1),
-            newEntry,
-            ...this.state.chartData.slice(index + 1)
-        ];
-        this.state.chartData = newData; */}
         console.log(this.state.val);
         console.log(this.state.index);
         let newArray = [...this.state.chartData]
@@ -55,7 +45,6 @@ export default class homePage extends React.Component{
             if(entry.x === this.state.index)
             {
                 entry.y = parseInt(this.state.val);
-                console.log("HEY!");
             }
         })
         this.setState({chartData: newArray});
@@ -67,7 +56,6 @@ export default class homePage extends React.Component{
             <Text style = {styles.charText}>Power Bill Data</Text>
             <VictoryChart domainPadding={25}>
                 <VictoryBar
-
                     categories={{
                         x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
                     }}
@@ -105,7 +93,7 @@ export default class homePage extends React.Component{
             <Button
                 title = "Add New Power Bill"
                 onPress={() => {this.addNewElement()
-                console.log("hi")}}
+                }}
             />
             <Button
                 title = "Remove Power Bill"
