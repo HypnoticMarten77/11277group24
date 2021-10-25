@@ -9,14 +9,14 @@ jobs:
     executor: my-custom-executor
     steps:
       - checkout
-      - name: Install dependencies
       - run: |
+          name: Install dependencies
           cd project-power-smart
           npm install
-      - name: Run tests
-      - run:
+      - run: |
+          name: Run tests
           npm run test
-          
+
 workflows:
   my-custom-workflow:
     jobs:
