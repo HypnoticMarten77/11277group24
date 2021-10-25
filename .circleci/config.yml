@@ -6,16 +6,17 @@ executors:
       
 jobs:
   build:
-    environment:
-      email: jondoe@organization.com
-      password: pass123
     executor: my-custom-executor
     steps:
       - checkout
+      - name: Install dependencies
       - run: |
           cd project-power-smart
           npm install
-
+      - name: Run tests
+      - run:
+          npm run test
+          
 workflows:
   my-custom-workflow:
     jobs:
