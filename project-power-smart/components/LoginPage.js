@@ -29,6 +29,16 @@ export default class loginPage extends React.Component{
                 ]
             );
         }
+        else if(this.state.email.includes('@') == false || this.state.email.includes('.') == false)
+        {
+            Alert.alert(
+                "Error",
+                "Please input a valid email address.",
+                [
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+        }
         else
         {
             this.props.navigation.navigate('Tab');
