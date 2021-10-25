@@ -141,7 +141,7 @@ class dailyTipsPage extends React.Component{
                 <Text style = {stylesTips.bigText}>Daily Tip</Text>
                 <Text style = {stylesTips.titleText}>{this.state.title}</Text>
                 <Text style = {stylesTips.descriptionText}>{this.state.description}</Text>
-                <Text style = {stylesTips.text}>Catagory</Text>
+                <Text style = {stylesTips.text}>Category</Text>
                 <ModalDropdown options={['General', 'Appliances', 'Electronics', 'Light Bulbs','Heating', 'Air Conditioning']}
                 defaultValue = "General"
                 animated = {true}

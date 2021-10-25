@@ -33,6 +33,26 @@ export default class loginPage extends React.Component{
                 ]
             );
         }
+        else if(this.state.email.includes('@') == false || this.state.email.includes('.') == false)
+        {
+            Alert.alert(
+                "Error",
+                "Please input a valid email address.",
+                [
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+        }
+        else if(this.state.password.length < 8)
+        {
+            Alert.alert(
+                "Error",
+                "Your password must be at least 8 characters in length.",
+                [
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+        }
         else if(this.state.password !== this.state.confirmPassword)
         {
             Alert.alert(
