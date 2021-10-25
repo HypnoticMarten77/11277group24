@@ -11,11 +11,11 @@ jobs:
       - checkout
       - run: |
           name: Install dependencies
-          cd project-power-smart
-          npm install
+          command: cd project-power-smart
+          command: npm install
       - run: |
           name: Run tests
-          npm run test
+          command: npm run test
 
 workflows:
   my-custom-workflow:
