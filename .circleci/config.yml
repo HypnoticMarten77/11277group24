@@ -2,7 +2,7 @@ version: 2.1
 executors:
   my-custom-executor:
     docker:
-      - image: cimg/node:stable
+      - image: cimg/node:17.0.1
       
 jobs:
   build:
