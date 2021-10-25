@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         width: "70%",
         height: 45,
         marginBottom: 20,
-
         alignItems: "center",
     },
 
@@ -40,16 +39,13 @@ const styles = StyleSheet.create({
         height: 50,
         flex: 1,
         padding: 10,
-        marginLeft: 20,
     },
     TextInputHome: {
         padding: 10,
-        marginLeft: 20,
     },
 
     forgot_button: {
         height: 30,
-        marginBottom: 30,
     },
 
     loginBtn: {
@@ -70,7 +66,36 @@ const styles = StyleSheet.create({
         position : 'absolute',
         bottom: 30,
         right : 30,
-    }
+    },
+    textButton: {
+        fontSize: 15,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+    },
+    button: {
+        marginTop : 25,
+        backgroundColor: "#b3b196",
+        borderRadius: 12,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        padding: 12,
+        textAlign:'center',
+    },
+    buttonClicked: {
+        marginTop : 25,
+        backgroundColor: "#353630",
+        borderRadius: 12,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        padding: 12,
+        textAlign:'center',
+    },
 });
 
 export default styles;

@@ -10,6 +10,7 @@ export default class loginPage extends React.Component{
         this.state = {
             email : "",
             password : "",
+            confirmPassword : "",
         };
     }
     handleEmail=(text)=>{
@@ -18,12 +19,25 @@ export default class loginPage extends React.Component{
     handlePassword=(text)=>{
         this.setState({password:text});
     }
+    handleConfirmPassword=(text)=>{
+        this.setState({confirmPassword : text});
+    }
     handleLogin = () =>{
-        if(this.state.email === "" || this.state.password === "")
+        if(this.state.email === "" || this.state.password === "" || this.state.confirmPassword === "")
         {
             Alert.alert(
                 "Error",
                 "Missing Email or Password",
+                [
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+        }
+        else if(this.state.password !== this.state.confirmPassword)
+        {
+            Alert.alert(
+                "Error",
+                "Passwords do not match!",
                 [
                     { text: "OK", onPress: () => console.log("OK Pressed") }
                 ]
@@ -61,13 +75,18 @@ export default class loginPage extends React.Component{
                         onChangeText={(text) =>this.handlePassword(text)}
                     />
                 </View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('NewUser')}>
-                    <Text style={styles.forgot_button}>Not A User? Create Account</Text>
-                </TouchableOpacity>
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder="Confirm Password"
+                        placeholderTextColor="#003f5c"
+                        secureTextEntry={true}
+                        onChangeText={(text) =>this.handleConfirmPassword(text)}
+                    />
+                </View>
                 <TouchableOpacity>
                     <Text style={styles.forgot_button}>Forgot Password?</Text>
                 </TouchableOpacity>
-
 
                 <TouchableOpacity style={styles.loginBtn} onPress={() => this.handleLogin()}>
                     <Button
