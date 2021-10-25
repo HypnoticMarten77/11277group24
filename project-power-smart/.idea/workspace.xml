@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00db2905-7581-47d7-a1f2-8d6aa8cc1422" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/Refresh_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/lightbulb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/newUserPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AppStyling.js" beforeDir="false" afterPath="$PROJECT_DIR$/AppStyling.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoginPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/TipsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/TipsPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
@@ -41,13 +48,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Bruce Maddux\Desktop\cenTesting2\11277group24\project-power-smart\assets" />
       <recent name="C:\Users\Bruce Maddux\project-power-smart\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">

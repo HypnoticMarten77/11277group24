@@ -1,4 +1,4 @@
-import {Button, Image, Text, TextInput, View} from "react-native";
+import {Button, Image, Text, TextInput, View, Pressable, TouchableOpacity, Alert, KeyboardAvoidingView} from "react-native";
 import styles from "../AppStyling"
 import React, { useState } from "react";
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory-native";
@@ -14,7 +14,7 @@ const INITIAL_STATE = [
     {x: "Jun", y: 6},
 ]
 
-const whiteStyle = {
+const grayStyle = {
     axis: { stroke: "gray" },
     axisLabel: { fontSize: 20, padding: 30, fill: "gray" },
     ticks: { stroke: "gray", size: 5, },
@@ -26,33 +26,77 @@ export default class homePage extends React.Component{
         super(props);
         this.state = {
             chartData : INITIAL_STATE,
-            index : "",
-            val : "",
+            month : "",
+            price : "",
+            addClicked : false,
+            removeClicked : false,
         };
     }
+    handleInput = (text) =>{
+        text = text.replace(/ /g, '')
+        if(text == "January")
+            return "Jan"
+        else if(text == "February")
+            return "Feb"
+        else if(text == "March")
+            return "Mar"
+        else if(text == "April")
+            return "Apr"
+        else if(text == "May")
+            return "May"
+        else if(text == "June")
+            return "Jun"
+        else
+            return text;
+    }
     handlePrice=(text)=>{
-        this.setState({val:text});
+        this.setState({price:text});
     }
     handleMonth=(text)=>{
-        this.setState({index:text});
+        this.setState({month:text});
+    }
+    handleAddButton = () =>
+    {
+        this.setState({addClicked : true})
+    }
+    handleRemoveButton = () =>
+    {
+        this.setState({removeClicked : true})
     }
     addNewElement = () =>
     {
-        console.log(this.state.val);
-        console.log(this.state.index);
+        let month = this.handleInput(this.state.month);
+        this.handleInput(this.state.month);
         let newArray = [...this.state.chartData]
         newArray.map(entry => {
-            if(entry.x === this.state.index)
+            if(entry.x === month)
             {
-                entry.y = parseInt(this.state.val);
+                entry.y = parseInt(this.state.price);
             }
         })
         this.setState({chartData: newArray});
-        console.log(newArray);
+        this.setState({addClicked : false})
+    }
+    removeElement = () =>
+    {
+        let month = this.handleInput(this.state.month);
+        let newArray = [...this.state.chartData]
+        newArray.map(entry => {
+            if (entry.x === month) {
+                entry.y = 0;
+            }
+        })
+        this.setState({chartData: newArray});
+        this.setState({removeClicked : false})
     }
     render() {
     return (
+
         <View style= {styles.container}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.container}
+            >
             <Text style = {styles.charText}>Power Bill Data</Text>
             <VictoryChart domainPadding={25}>
                 <VictoryBar
@@ -75,29 +119,42 @@ export default class homePage extends React.Component{
                 />
                 <VictoryAxis
                     label="Months"
-                    style={whiteStyle}/>
+                    style={grayStyle}/>
                 <VictoryAxis dependentAxis
                     label="Cost"
-                    style={whiteStyle} />
+                    style={grayStyle} />
             </VictoryChart>
-            <TextInput
-                style={styles.TextInputHome}
-                placeholder = "Month"
+
+            {!this.state.removeClicked &&<Pressable style = {this.state.addClicked ? styles.buttonClicked : styles.button} onPress={() => {this.handleAddButton()}}>
+                <Text style = {styles.textButton} > Add New Power Bill </Text>
+            </Pressable>}
+            {this.state.addClicked && !this.state.removeClicked && <TextInput
+                style={styles.TextInputHome, {marginTop: 20, width : 250, textAlign : "center", fontSize : 18}}
+                placeholder = "Enter Month"
                 onChangeText={(text) =>this.handleMonth(text)}
-            />
-            <TextInput
-                style={styles.TextInputHome}
-                placeholder = "Price"
+                clearTextOnFocus = {true}
+            />}
+            {this.state.addClicked && !this.state.removeClicked && <TextInput
+                style={styles.TextInputHome, {marginTop: 20, width : 250, textAlign : "center", fontSize : 18}}
+                placeholder = "Enter Price"
                 onChangeText={(text) =>this.handlePrice(text)}
-            />
-            <Button
-                title = "Add New Power Bill"
-                onPress={() => {this.addNewElement()
-                }}
-            />
-            <Button
-                title = "Remove Power Bill"
-            />
+            />}
+            {this.state.addClicked && !this.state.removeClicked && <Button title = "Confirm" onPress={() => {this.addNewElement()}}/>}
+
+
+
+
+            {!this.state.addClicked && <Pressable style = {this.state.removeClicked ? styles.buttonClicked : styles.button} onPress={() => {this.handleRemoveButton()}}>
+                <Text style = {styles.textButton} > Remove Power Bill </Text>
+            </Pressable>}
+            {!this.state.addClicked && this.state.removeClicked && <TextInput
+                style={styles.TextInputHome, {marginTop: 20, width : 250, textAlign : "center", fontSize : 18}}
+                placeholder = "Enter Month"
+                onChangeText={(text) =>this.handleMonth(text)}
+                clearTextOnFocus = {true}
+            />}
+            {!this.state.addClicked && this.state.removeClicked && <Button title = "Confirm" onPress={() => {this.removeElement()}}/>}
+            </KeyboardAvoidingView>
         </View>
 
     );
