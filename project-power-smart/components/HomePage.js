@@ -129,13 +129,13 @@ export default class homePage extends React.Component{
                 <Text style = {styles.textButton} > Add New Power Bill </Text>
             </Pressable>}
             {this.state.addClicked && !this.state.removeClicked && <TextInput
-                style={styles.TextInputHome, {marginTop: 20, width : 250, textAlign : "center", fontSize : 18}}
+                style={styles.TextInputHome}
                 placeholder = "Enter Month"
                 onChangeText={(text) =>this.handleMonth(text)}
                 clearTextOnFocus = {true}
             />}
             {this.state.addClicked && !this.state.removeClicked && <TextInput
-                style={styles.TextInputHome, {marginTop: 20, width : 250, textAlign : "center", fontSize : 18}}
+                style={styles.TextInputHome}
                 placeholder = "Enter Price"
                 onChangeText={(text) =>this.handlePrice(text)}
             />}
@@ -148,7 +148,7 @@ export default class homePage extends React.Component{
                 <Text style = {styles.textButton} > Remove Power Bill </Text>
             </Pressable>}
             {!this.state.addClicked && this.state.removeClicked && <TextInput
-                style={styles.TextInputHome, {marginTop: 20, width : 250, textAlign : "center", fontSize : 18}}
+                style={styles.TextInputHome}
                 placeholder = "Enter Month"
                 onChangeText={(text) =>this.handleMonth(text)}
                 clearTextOnFocus = {true}

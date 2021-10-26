@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     },
     TextInputHome: {
         padding: 10,
+        marginTop: 20,
+        width : 250,
+        textAlign : "center",
+        fontSize : 18
     },
 
     forgot_button: {

@@ -5,8 +5,16 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest"
   },
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)(?!victory|react-native-svg|react-native)"
+    ]
+  },
+
   "dependencies": {
     "@react-native-picker/picker": "^1.16.8",
     "@react-navigation/bottom-tabs": "^6.0.9",
@@ -14,6 +22,7 @@
     "@react-navigation/stack": "^6.0.11",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
+    "jest-expo": "^43.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -31,12 +40,17 @@
     "react-native-svg": "^12.1.1",
     "react-native-table-component": "^1.2.1",
     "react-native-web": "~0.13.12",
+    "react-test-renderer": "^17.0.2",
     "sucrase": "^3.20.1",
     "victory-native": "^35.5.5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.15.8",
     "@react-navigation/native": "^6.0.4",
+    "babel-jest": "^27.3.1",
+    "jest": "^27.3.1",
+    "jets": "^0.14.1",
     "react-native-line-chart": "^1.0.4"
   },
   "private": true
