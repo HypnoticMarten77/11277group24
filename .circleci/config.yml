@@ -1,4 +1,5 @@
 version : 2.1
+working_directory: ~/11277group24/project-power-smart
 jobs:
   build:
     docker:
