@@ -1,33 +1,25 @@
-# Build and test the iOS app in release mode
-ios_e2e_test:
-  executor: rn/macos
-  steps:
-    - checkout
-    - attach_workspace:
-        at: .
-    - rn/setup_macos_executor:
-        homebrew_cache: true
-        node_version: "12"
-    - rn/ios_simulator_start:
-        device: "iPhone 11"
-    - rn/yarn_install:
-        # basically because of this https://github.com/react-native-community/react-native-circleci-orb/issues/66
-        cache: false
-    - rn/pod_install:
-        pod_install_directory: ios
-    # Yep, it doesn't really matter if you don't run detox build for ios, it works like a charm. But if you prefer, you can replace this step with a custom one.
-    - rn/ios_build:
-        build_configuration: "Release"
-        cache: false
-        derived_data_path: "ios/build"
-        device: "iPhone 11"
-        project_path: "ios/example.xcworkspace"
-        project_type: workspace
-        scheme: "example"
-    - run:
-        command: >-
-          detox test -c ios.sim.release -l warn --headless --take-screenshots
-          failing --artifacts-location /tmp/detox_artifacts
-        name: Detox Test
-    - store_artifacts:
-        path: /tmp/detox_artifacts
+version: 2
+jobs:
+  build:
+    macos:
+      xcode: "11.3.0"
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Set up environment
+      - run: npm install -g react-native-cli
+      - run: npm install -g detox-cli
+      - run: brew tap wix/brew
+      - run: brew install applesimutils
+
+      # run unit tests
+      - run: yarn install
+      - run: yarn test
+
+      # run E2E tests
+      - run: cd ios && pod install && cd ..
+      - run: detox build --configuration ios.sim.release
+      - run: detox test --configuration ios.sim.release --cleanup
