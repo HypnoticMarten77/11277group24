@@ -16,6 +16,29 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+  build:
+    macos:
+      xcode: "11.3.0"
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Set up environment
+      - run: npm install -g react-native-cli
+      - run: npm install -g detox-cli
+      - run: brew tap wix/brew
+      - run: brew install applesimutils
+
+      # run unit tests
+      - run: yarn install
+      - run: yarn test
+
+      # run E2E tests
+      - run: cd ios && pod install && cd ..
+      - run: detox build --configuration ios.sim.release
+      - run: detox test --configuration ios.sim.release --cleanup
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
