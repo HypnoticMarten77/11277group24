@@ -78,5 +78,3 @@ workflows:
           build_configuration: "Release"
           scheme: "Example"
           detox_configuration: "ios.sim.release"
-          requires:
-            - analyse_js
