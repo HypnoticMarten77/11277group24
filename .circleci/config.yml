@@ -1,48 +1,82 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+
+orbs:
+  rn: react-native-community/react-native@5.1.0
+# Custom jobs which are not part of the Orb
 jobs:
-  say-hello:
-    # Specify the execution environment.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  checkout_code:
+    executor: rn/linux_js
     steps:
       - checkout
+      - persist_to_workspace:
+          root: .
+          paths: .
+  analyse_js:
+    executor: rn/linux_js
+    steps:
+      - attach_workspace:
+          at: .
+      - rn/yarn_install
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-  build:
-    macos:
-      xcode: "11.3.0"
+          name: Run ESLint
+          command: yarn eslint
+      - run:
+          name: Flow
+          command: yarn flow
+      - run:
+          name: Jest
+          command: yarn jest
 
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      # Set up environment
-      - run: npm install -g react-native-cli
-      - run: npm install -g detox-cli
-      - run: brew tap wix/brew
-      - run: brew install applesimutils
-
-      # run unit tests
-      - run: yarn install
-      - run: yarn test
-
-      # run E2E tests
-      - run: cd ios && pod install && cd ..
-      - run: detox build --configuration ios.sim.release
-      - run: detox test --configuration ios.sim.release --cleanup
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  test:
     jobs:
-      - say-hello
-      - build
+      # Checkout the code and persist to the Workspace
+      # Note: This is a job that is defined above and not part of the Orb
+      - checkout_code
+
+      # Analyze the Javascript using ESLint, Flow, and Jest
+      # Note: This is a job that is defined above and not part of the Orb
+      - analyse_js:
+          requires:
+            - checkout_code
+
+      # Build the Android app in debug mode
+      - rn/android_build:
+          name: build_android_debug
+          project_path: "android"
+          build_type: debug
+          requires:
+            - analyse_js
+
+      # Build and test the Android app in release mode
+      # Note: We split these into separate jobs because we can build the Android app on a Linux machine and preserve the expensive MacOS executor minutes for when it's required
+      - rn/android_build:
+          name: build_android_release
+          project_path: "android"
+          build_type: release
+          requires:
+            - analyse_js
+      - rn/android_test:
+          detox_configuration: "android.emu.release"
+          requires:
+            - build_android_release
+
+      # Build the iOS app in release mode and do not run tests
+      - rn/ios_build:
+          name: build_ios_release
+          project_path: ios/Example.xcodeproj
+          device: "iPhone X"
+          build_configuration: Release
+          scheme: Example
+          requires:
+            - analyse_js
+
+      # Build and test the iOS app in release mode
+      - rn/ios_build_and_test:
+          project_path: "ios/Example.xcodeproj"
+          device: "iPhone X"
+          build_configuration: "Release"
+          scheme: "Example"
+          detox_configuration: "ios.sim.release"
+          requires:
+            - analyse_js
