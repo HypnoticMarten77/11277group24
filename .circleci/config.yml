@@ -1,5 +1,5 @@
 version : 2.1
-working_directory: ~/11277group24
+working_directory: /home/circleci/project/11277group24/project-power-smart
 jobs:
   build:
     docker:
