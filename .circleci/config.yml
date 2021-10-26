@@ -1,9 +1,13 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+version : 2.1
+working_directory: /home/circleci/project/11277group24/project-power-smart
 jobs:
+  build:
+    docker:
+      - image : circleci/node:8.9.0
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
   say-hello:
     # Specify the execution environment.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -22,3 +26,4 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - build
