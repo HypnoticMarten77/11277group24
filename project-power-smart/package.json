@@ -14,8 +14,8 @@
       "node_modules/(?!(jest-)?react-native|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)(?!victory|react-native-svg|react-native)"
     ]
   },
-
   "dependencies": {
+    "@react-native-community/geolocation": "^2.0.2",
     "@react-native-picker/picker": "^1.16.8",
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/native-stack": "^6.2.2",
@@ -25,11 +25,14 @@
     "jest-expo": "^43.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-icons": "^4.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-chart-kit": "^6.11.0",
     "react-native-dropdown-picker": "^5.2.0",
     "react-native-element-dropdown": "^1.4.1",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-get-location": "^2.1.2",
+    "react-native-maps": "^0.29.3",
     "react-native-material-dropdown-v2-fixed": "^0.11.3",
     "react-native-modal-dropdown": "^1.0.2",
     "react-native-paper": "^4.9.2",
@@ -39,8 +42,10 @@
     "react-native-select-dropdown": "^1.2.0",
     "react-native-svg": "^12.1.1",
     "react-native-table-component": "^1.2.1",
+    "react-native-vector-icons": "^9.0.0",
     "react-native-web": "~0.13.12",
     "react-test-renderer": "^17.0.2",
+    "simple-line-icons": "^2.5.5",
     "sucrase": "^3.20.1",
     "victory-native": "^35.5.5"
   },
