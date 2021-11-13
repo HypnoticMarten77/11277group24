@@ -1,5 +1,4 @@
 import {StyleSheet} from "react-native"
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -46,10 +45,6 @@ const styles = StyleSheet.create({
         width : 250,
         textAlign : "center",
         fontSize : 18
-    },
-
-    forgot_button: {
-        height: 30,
     },
 
     loginBtn: {

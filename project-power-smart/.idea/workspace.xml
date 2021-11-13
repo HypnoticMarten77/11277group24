@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00db2905-7581-47d7-a1f2-8d6aa8cc1422" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/appliance.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/home.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/login.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/tips.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AppStyling.js" beforeDir="false" afterPath="$PROJECT_DIR$/AppStyling.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TabRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/TabRouter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoginPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MapPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/MapPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -47,10 +45,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/coin-flip" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -82,7 +81,8 @@
       <workItem from="1635186211650" duration="302000" />
       <workItem from="1635186546712" duration="1373000" />
       <workItem from="1635213153050" duration="697000" />
-      <workItem from="1635214435023" duration="5446000" />
+      <workItem from="1635214435023" duration="7965000" />
+      <workItem from="1636477058338" duration="7246000" />
     </task>
     <servers />
   </component>

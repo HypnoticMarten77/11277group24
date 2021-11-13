@@ -1,8 +1,19 @@
-import {Button, Text, View, Image, Picker, StyleSheet, Dimensions, TouchableOpacity} from "react-native";
+import {
+    Button,
+    Text,
+    View,
+    Image,
+    Picker,
+    StyleSheet,
+    Dimensions,
+    TouchableOpacity,
+    Alert,
+    Pressable, Modal
+} from "react-native";
 import React, { useState } from "react";
 import styles from "../AppStyling"
 import ModalDropdown from 'react-native-modal-dropdown';
-
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 const windowWidth = Dimensions.get('window').width;
 
 const applianceTips = [
@@ -87,6 +98,7 @@ class dailyTipsPage extends React.Component{
             description : "Two 100-watt incandescent bulbs switched off an extra two hours per " +
                 "day could save you $15 over a year. Better yet, switch to LED.",
             catagory : 0,
+            helpVisible : false,
         };
     }
     handleSelect = (text) =>
@@ -101,42 +113,69 @@ class dailyTipsPage extends React.Component{
         let x = parseInt(text);
         if(x === 0)
         {
-            x = parseInt(Math.random() * 5) + 1;
+            x = ~~(Math.random() * 5) + 1;
         }
         if(x === 1)
         {
-            let index = parseInt(Math.random() * applianceTips.length);
+            let index = ~~(Math.random() * applianceTips.length);
             this.setState({title : applianceTips[index].header});
             this.setState({description : applianceTips[index].description})
         }
         if(x === 2)
         {
-            let index = parseInt(Math.random() * electronicsTips.length);
+            let index = ~~(Math.random() * electronicsTips.length);
             this.setState({title : electronicsTips[index].header});
             this.setState({description : electronicsTips[index].description})
         }
         if(x === 3)
         {
-            let index = parseInt(Math.random() * lightBulbTips.length);
+            let index = ~~(Math.random() * lightBulbTips.length);
             this.setState({title : lightBulbTips[index].header});
             this.setState({description : lightBulbTips[index].description})
         }
         if(x === 4)
         {
-            let index = parseInt(Math.random() * heatingTips.length);
+            let index = ~~(Math.random() * heatingTips.length);
             this.setState({title : heatingTips[index].header});
             this.setState({description : heatingTips[index].description})
         }
         if(x === 5)
         {
-            let index = parseInt(Math.random() * airConditioningTips.length);
+            let index = ~~(Math.random() * airConditioningTips.length);
             this.setState({title : airConditioningTips[index].header});
             this.setState({description : airConditioningTips[index].description})
         }
     }
+    setHelpVisible = (visible) =>
+    {
+        this.setState({helpVisible : visible});
+    }
     render() {
+        const { helpVisible } = this.state;
         return (
             <View style = {styles.container}>
+                <TouchableOpacity style = {stylesTips.helpButton} onPress = {() => this.setHelpVisible(!helpVisible)}>
+                    <SimpleLineIcons name={"question"} color={"gray"} size={40} />
+                </TouchableOpacity>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={helpVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        this.setHelpVisible(!helpVisible);
+                    }}
+                >
+                    <View style={stylesTips.centeredView}>
+                        <View style={stylesTips.modalView}>
+                            <Text style = {stylesTips.helpTitleText}>Tips Screen</Text>
+                            <Text>Rich descriptive words that puts a picture of a person, place, or an object in a readers mind. When a person is writing a descriptive piece, there should be very detailed observations, write what you see in your mind. All parts should be equal. The more detail the better the story. You should start at one point and move in one direction as not to confuse the audience. Such as clock wise, left to right, top to bottom. The reader should be able to envision the picture that you had in your mind as the writer.</Text>
+                            <Pressable onPress = {() => this.setHelpVisible(!helpVisible)}>
+                                <SimpleLineIcons name={"close"} color={"gray"} size={40} />
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
                 <Image style={stylesTips.image} source={require("../assets/lightbulb.png")}/>
                 <Text style = {stylesTips.bigText}>Daily Tip</Text>
                 <Text style = {stylesTips.titleText}>{this.state.title}</Text>
@@ -204,7 +243,39 @@ const stylesTips = StyleSheet.create({
         marginTop : 50,
         height : 60,
         width : 60,
-    }
+    },
+    helpButton : {
+        height : 40,
+        width : 40,
+        borderRadius : 100,
+        alignItems : "center",
+        justifyContent : "center",
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        bottom: 704,
+        right : 30,
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+    },
+    helpTitleText: {
+        fontSize : 30
+    },
 });
 
 export default dailyTipsPage;
