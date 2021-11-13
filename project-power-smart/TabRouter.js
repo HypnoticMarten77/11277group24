@@ -29,7 +29,7 @@ const screenOptions = (route, color) => {
     }
 
     return <SimpleLineIcons name={iconName} color={color} size={20} />;
-};
+}; 
 const TabNav = ({route, navigation}) => {
     return (
         <Tab.Navigator

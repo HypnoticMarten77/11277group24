@@ -2,7 +2,8 @@ import {Alert, Button, Image, Text, TextInput, TouchableOpacity, View} from "rea
 import {StatusBar} from "expo-status-bar";
 import React, { useState } from "react";
 import styles from "../AppStyling"
-
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
+import loginStyles from '../StyleSheets/loginStyles'
 
 export default class loginPage extends React.Component{
     constructor(props) {
@@ -77,42 +78,54 @@ export default class loginPage extends React.Component{
                 <Image style={styles.image} source={require("../assets/lightningbolt3.png")}/>
                 <Text style={styles.bigText}> Power Smart</Text>
                 <StatusBar style="auto"/>
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder="Email"
-                        placeholderTextColor="#003f5c"
-                        onChangeText={(text) =>this.handleEmail(text)}
-                    />
+                <View style = {{flexDirection : 'row', alignItems : "center"}}>
+                    <SimpleLineIcons style = {{marginRight : 10,}}name={"user"} color={"black"} size={25} />
+                    <View style={loginStyles.viewInput}>
+                        <TextInput
+                            style={loginStyles.textInput}
+                            placeholderTextColor="gray"
+                            onChangeText={(text) =>this.handleEmail(text)}
+                            textAlignVertical='top'
+                            placeholder = "Enter Email"
+                            keyboardType="visible-password"
+                            autoCapitalize='none'
+                            autoCorrect={false}
+
+                        />
+                    </View>
+                </View>
+                <View style = {{flexDirection : 'row', alignItems : "center"}}>
+                    <SimpleLineIcons style = {{marginRight : 10,}}name={"lock-open"} color={"black"} size={25} />
+                    <View style={loginStyles.viewInput}>
+                        <TextInput
+                            style={loginStyles.textInput}
+                            placeholder = "Enter Password"
+                            placeholderTextColor="gray"
+                            keyboardType="visible-password"
+                            secureTextEntry={true}
+                            textAlignVertical='top'
+                            onChangeText={(text) =>this.handlePassword(text)}
+                        />
+                    </View>
+                </View>
+                <View style = {{flexDirection : 'row', alignItems : "center"}}>
+                    <SimpleLineIcons style = {{marginRight : 10,}}name={"lock"} color={"black"} size={25} />
+                    <View style={loginStyles.viewInput}>
+                        <TextInput
+                            style={loginStyles.textInput}
+                            placeholder = "Confirm Password"
+                            placeholderTextColor="gray"
+                            keyboardType="visible-password"
+                            secureTextEntry={true}
+                            textAlignVertical='top'
+                            onChangeText={(text) =>this.handleConfirmPassword(text)}
+                        />
+                    </View>
                 </View>
 
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder="Password"
-                        placeholderTextColor="#003f5c"
-                        secureTextEntry={true}
-                        onChangeText={(text) =>this.handlePassword(text)}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder="Confirm Password"
-                        placeholderTextColor="#003f5c"
-                        secureTextEntry={true}
-                        onChangeText={(text) =>this.handleConfirmPassword(text)}
-                    />
-                </View>
-                <TouchableOpacity>
-                    <Text style={styles.forgot_button}>Forgot Password?</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.loginBtn} onPress={() => this.handleLogin()}>
-                    <Button
-                        title="Login"
-                        onPress={() => this.handleLogin()}
-                    />
+                <TouchableOpacity style={loginStyles.button} onPress={() => this.handleLogin()}>
+                    <SimpleLineIcons style = {{marginRight : 10,}}name={"login"} color={"black"} size={20} />
+                    <Text style = {loginStyles.textButton}> Login</Text>
                 </TouchableOpacity>
 
             </View>

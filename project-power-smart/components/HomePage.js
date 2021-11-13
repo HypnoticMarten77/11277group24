@@ -8,13 +8,13 @@ import {
     TouchableOpacity,
     Alert,
     KeyboardAvoidingView,
-    StyleSheet
+    StyleSheet, Modal
 } from "react-native";
 import styles from "../AppStyling"
 import React, { useState } from "react";
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory-native";
 import {Dimensions} from "react-native-web";
-
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 const INITIAL_STATE_6_MONTH = [
     {x: "Jan", y: 1},
     {x: "Feb", y: 2},
@@ -37,6 +37,28 @@ const INITIAL_STATE_1_YEAR = [
     {x: "Nov", y: 11},
     {x: "Dec", y: 12},
 ]
+const CLEAR_DATA_6_MONTH = [
+    {x: "Jan", y: 0},
+    {x: "Feb", y: 0},
+    {x: "Mar", y: 0},
+    {x: "Apr", y: 0},
+    {x: "May", y: 0},
+    {x: "Jun", y: 0},
+]
+const CLEAR_DATA_1_YEAR = [
+    {x: "Jan", y: 0},
+    {x: "Feb", y: 0},
+    {x: "Mar", y: 0},
+    {x: "Apr", y: 0},
+    {x: "May", y: 0},
+    {x: "Jun", y: 0},
+    {x: "Jul", y: 0},
+    {x: "Aug", y: 0},
+    {x: "Sep", y: 0},
+    {x: "Oct", y: 0},
+    {x: "Nov", y: 0},
+    {x: "Dec", y: 0},
+]
 const INITIAL_CATEGORIES_6_MONTH = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun"
 ]
@@ -45,7 +67,14 @@ const INITIAL_CATEGORIES_1_YEAR = [
 ]
 const screenHeight = Dimensions.get('window').height - 56;
 
-const grayStyle = {
+const grayStyle1Year = {
+    axis: { stroke: "gray" },
+    axisLabel: { fontSize: 20, padding: 30, fill: "gray" },
+    ticks: { stroke: "gray", size: 5, },
+    tickLabels: { fontSize: 10, padding: 5, fill: "gray" }
+}
+
+const grayStyle6Month = {
     axis: { stroke: "gray" },
     axisLabel: { fontSize: 20, padding: 30, fill: "gray" },
     ticks: { stroke: "gray", size: 5, },
@@ -58,11 +87,13 @@ export default class homePage extends React.Component{
         this.state = {
             chartData : INITIAL_STATE_6_MONTH,
             category : INITIAL_CATEGORIES_6_MONTH,
+            grayStyle : grayStyle6Month,
             month : "",
             price : "",
             addClicked : false,
             removeClicked : false,
             sixMonth : true,
+            helpVisible : false,
         };
     }
     handleInput = (text) =>{
@@ -133,6 +164,7 @@ export default class homePage extends React.Component{
         }
         this.setState({chartData: newArray});
         this.setState({category : INITIAL_CATEGORIES_1_YEAR});
+        this.setState({grayStyle : grayStyle1Year})
         this.state.sixMonth = false;
     }
     handle6Month = () =>
@@ -145,12 +177,22 @@ export default class homePage extends React.Component{
         }
         this.setState({chartData: newArray});
         this.setState({category : INITIAL_CATEGORIES_6_MONTH});
+        this.setState({grayStyle : grayStyle6Month})
         this.state.sixMonth = true;
-
+    }
+    handleClearData = () =>
+    {
+        if(this.state.catagory === INITIAL_CATEGORIES_6_MONTH)
+            this.setState({chartData : CLEAR_DATA_6_MONTH});
+        else
+            this.setState({chartData : CLEAR_DATA_1_YEAR});
+    }
+    setHelpVisible = (visible) => {
+        this.setState({ helpVisible: visible });
     }
     render() {
         let yearButtonStyle = this.state.sixMonth ? "yearButton" : "yearButtonClicked";
-
+        const { helpVisible } = this.state;
         return (
 
         <View style= {styles.container}>
@@ -165,6 +207,31 @@ export default class homePage extends React.Component{
                 justifyContent: "center",
                 marginTop: 150,
             }}>
+                <TouchableOpacity style = {homePageStyles.clearButton} onPress={() => this.handleClearData()}>
+                    <Text>Clear Data</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style = {homePageStyles.helpButton} onPress = {() => this.setHelpVisible(!helpVisible)}>
+                    <SimpleLineIcons name={"question"} color={"gray"} size={40} />
+                </TouchableOpacity>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={helpVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        this.setHelpVisible(!helpVisible);
+                    }}
+                >
+                    <View style={homePageStyles.centeredView}>
+                        <View style={homePageStyles.modalView}>
+                            <Text style = {homePageStyles.helpTitleText}>Home Screen</Text>
+                            <Text>Rich descriptive words that puts a picture of a person, place, or an object in a readers mind. When a person is writing a descriptive piece, there should be very detailed observations, write what you see in your mind. All parts should be equal. The more detail the better the story. You should start at one point and move in one direction as not to confuse the audience. Such as clock wise, left to right, top to bottom. The reader should be able to envision the picture that you had in your mind as the writer.</Text>
+                            <Pressable onPress = {() => this.setHelpVisible(!helpVisible)}>
+                                <SimpleLineIcons name={"close"} color={"gray"} size={40} />
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
                 <Text style = {styles.charText}>Power Bill Data</Text>
                 <VictoryChart domainPadding={25}>
                     <VictoryBar
@@ -185,10 +252,10 @@ export default class homePage extends React.Component{
                     />
                     <VictoryAxis
                         label="Months"
-                        style={grayStyle}/>
+                        style={this.state.grayStyle}/>
                     <VictoryAxis dependentAxis
                                  label="Cost"
-                                 style={grayStyle} />
+                                 style={this.state.grayStyle} />
                 </VictoryChart>
             </View>
 
@@ -284,6 +351,31 @@ const homePageStyles = StyleSheet.create( {
         justifyContent: "center",
         height : 30,
     },
+    clearButton : {
+        backgroundColor: 'white',
+        borderColor: '#333',
+        borderWidth: 2,
+        borderRadius: 22,
+        height : 30,
+        width : 80,
+        alignItems : "center",
+        justifyContent : "center",
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        bottom: -330,
+        right : 30,
+    },
+    helpButton : {
+        height : 40,
+        width : 40,
+        borderRadius : 100,
+        alignItems : "center",
+        justifyContent : "center",
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        bottom: 330,
+        right : 30,
+    },
     monthButtonClicked : {
         backgroundColor: 'lightgray',
         borderColor: '#333',
@@ -346,5 +438,26 @@ const homePageStyles = StyleSheet.create( {
         lineHeight: 21,
         letterSpacing: 0.25,
         color: 'black',
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+    },
+    helpTitleText: {
+        fontSize : 30
     },
 })
