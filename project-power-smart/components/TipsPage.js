@@ -91,6 +91,7 @@ const airConditioningTips = [
 
 ]
 class dailyTipsPage extends React.Component{
+
     constructor(props) {
         super(props);
         this.state = {
@@ -99,6 +100,7 @@ class dailyTipsPage extends React.Component{
                 "day could save you $15 over a year. Better yet, switch to LED.",
             catagory : 0,
             helpVisible : false,
+            isGeneral : true,
         };
     }
     handleSelect = (text) =>
@@ -111,8 +113,11 @@ class dailyTipsPage extends React.Component{
     */
         let index = 0;
         let x = parseInt(text);
+        this.setState({isGeneral : false});
         if(x === 0)
         {
+            this.setState({catagory : 0})
+            this.setState({isGeneral : true});
             x = ~~(Math.random() * 5) + 1;
         }
         if(x === 1)
@@ -120,30 +125,40 @@ class dailyTipsPage extends React.Component{
             let index = ~~(Math.random() * applianceTips.length);
             this.setState({title : applianceTips[index].header});
             this.setState({description : applianceTips[index].description})
+            if (!(this.state.isGeneral))
+                this.setState({catagory : 1})
         }
         if(x === 2)
         {
             let index = ~~(Math.random() * electronicsTips.length);
             this.setState({title : electronicsTips[index].header});
             this.setState({description : electronicsTips[index].description})
+            if (!(this.state.isGeneral))
+                this.setState({catagory : 2})
         }
         if(x === 3)
         {
             let index = ~~(Math.random() * lightBulbTips.length);
             this.setState({title : lightBulbTips[index].header});
             this.setState({description : lightBulbTips[index].description})
+            if (!(this.state.isGeneral))
+                this.setState({catagory : 3})
         }
         if(x === 4)
         {
             let index = ~~(Math.random() * heatingTips.length);
             this.setState({title : heatingTips[index].header});
             this.setState({description : heatingTips[index].description})
+            if (!(this.state.isGeneral))
+                this.setState({catagory : 4})
         }
         if(x === 5)
         {
             let index = ~~(Math.random() * airConditioningTips.length);
             this.setState({title : airConditioningTips[index].header});
             this.setState({description : airConditioningTips[index].description})
+            if (!(this.state.isGeneral))
+                this.setState({catagory : 5})
         }
     }
     setHelpVisible = (visible) =>
@@ -169,7 +184,7 @@ class dailyTipsPage extends React.Component{
                     <View style={stylesTips.centeredView}>
                         <View style={stylesTips.modalView}>
                             <Text style = {stylesTips.helpTitleText}>Tips Screen</Text>
-                            <Text>Rich descriptive words that puts a picture of a person, place, or an object in a readers mind. When a person is writing a descriptive piece, there should be very detailed observations, write what you see in your mind. All parts should be equal. The more detail the better the story. You should start at one point and move in one direction as not to confuse the audience. Such as clock wise, left to right, top to bottom. The reader should be able to envision the picture that you had in your mind as the writer.</Text>
+                            <Text>On this screen you can view tips on saving energy that you can use day by day.  General allows you to view any tips, while other categories allow for you to view tips for specific areas.</Text>
                             <Pressable onPress = {() => this.setHelpVisible(!helpVisible)}>
                                 <SimpleLineIcons name={"close"} color={"gray"} size={40} />
                             </Pressable>
@@ -243,7 +258,7 @@ const stylesTips = StyleSheet.create({
         color : "#202c4a",
     },
     refreshImage : {
-        marginTop : 50,
+        marginTop : 10,
         height : 60,
         width : 60,
     },
@@ -255,8 +270,8 @@ const stylesTips = StyleSheet.create({
         justifyContent : "center",
         alignSelf: 'flex-end',
         position: 'absolute',
-        bottom: 704,
-        right : 30,
+        bottom: 559,
+        right : 20,
     },
     centeredView: {
         flex: 1,

@@ -24,7 +24,7 @@ export default class loginPage extends React.Component{
         {
             Alert.alert(
                 "Error",
-                "Missing Email or Password",
+                "Missing email or password.",
                 [
                     { text: "OK", onPress: () => console.log("OK Pressed") }
                 ]
@@ -51,8 +51,7 @@ export default class loginPage extends React.Component{
             <View style={styles.container}>
 
 
-                <Image style={styles.image} source={require("../assets/lightningbolt3.png")}/>
-                <Text style={styles.bigText}> Power Smart</Text>
+                <Image style={styles.image} source={require("../assets/powersmart.png")}/>
                 <StatusBar style="auto"/>
                 <View style = {{flexDirection : 'row', alignItems : "center"}}>
                     <SimpleLineIcons style = {{marginRight : 10,}}name={"user"} color={"black"} size={25} />
@@ -87,7 +86,7 @@ export default class loginPage extends React.Component{
                 </View>
 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('NewUser')}>
-                    <Text style={{height : 30, marginTop : 10, color : 'blue'}}>Not A User? Create Account</Text>
+                    <Text style={{height : 30, marginTop : 10, color : 'blue'}}>Not a user? Create Account</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <Text style={{height : 30, color : 'blue'}}>Forgot Password?</Text>
