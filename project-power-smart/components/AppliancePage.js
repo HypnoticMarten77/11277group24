@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert , Modal, Pressable, TextInput} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
+const energyEfficientData = [
+    ['Dishwasher', 'BLACK+DECKER'],
+    ['Air Conditioner', 'Trane'],
+]
+const energyInefficientData = [
+    ['Blender', 'Vitamix'],
+    ['Ceiling Fan', 'minkaAire']
+]
 
 export default class appliancePage extends Component {
     constructor(props) {
@@ -23,6 +33,8 @@ export default class appliancePage extends Component {
             addVisible : false,
             editVisible : false,
             helpVisible : false,
+            energyEfficient : false,
+            energyInefficient : false,
             name : "",
             model : "",
             index : -1,
@@ -30,11 +42,27 @@ export default class appliancePage extends Component {
     }
 
     displayViewEdit(index) {
+        this.setState({energyEfficient : false})
+        this.setState({energyInefficient : false})
         this.setEditVisible(!this.state.editVisible)
         let entry = this.state.tableData[index];
         this.setState({name : entry[0]});
         this.setState({model : entry[1]});
         this.setState({index : index});
+        for(let i = 0; i < energyEfficientData.length; i++)
+        {
+            if(energyEfficientData[i][0] === entry[0] && energyEfficientData[i][1] === entry[1])
+            {
+                this.setState({energyEfficient : true});
+            }
+        }
+        for(let i = 0; i < energyInefficientData.length; i++)
+        {
+            if(energyInefficientData[i][0] === entry[0] && energyInefficientData[i][1] === entry[1])
+            {
+                this.setState({energyInefficient : true});
+            }
+        }
     }
     setAddVisible = (visible) => {
         if(visible)
@@ -87,6 +115,9 @@ export default class appliancePage extends Component {
         const { addVisible } = this.state;
         const { editVisible } = this.state;
         const { helpVisible } = this.state;
+        const { energyEfficient } = this.state;
+        const { energyInefficient } = this.state;
+
         const element = (data, index) => (
             <TouchableOpacity onPress={() => this.displayViewEdit(index)}>
                 <View style={styles.btn}>
@@ -170,6 +201,9 @@ export default class appliancePage extends Component {
                 >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
+                            <TouchableOpacity  style = {styles.closeButton} onPress={() => this.setEditVisible(false)}>
+                                <SimpleLineIcons name = {"close"} color = {"gray"} size = {25}/>
+                            </TouchableOpacity>
                             <Text style = {styles.bigText}>Appliance Info</Text>
                             <Text style = {styles.headerText}>Appliance Name</Text>
                             <TextInput
@@ -179,13 +213,23 @@ export default class appliancePage extends Component {
                                 onChangeText={(text) =>this.handleName(text)}
                             />
                             <Text style = {styles.headerText}>Appliance Model</Text>
-
                             <TextInput
                                 style = {styles.textInput}
                                 placeholder= {this.state.model}
                                 placeholderTextColor="gray"
                                 onChangeText={(text) =>this.handleModel(text)}
                             />
+                            {energyEfficient &&
+                            <View style = {{flexDirection : 'row', alignItems : 'center', marginBottom : 10}}>
+                                <Text style = {{color : 'green', fontSize : 15}}>This appliance is energy efficient!</Text>
+                                <Icon size={24} color={"green"} name={"leaf"} />
+                            </View> }
+                            {energyInefficient &&
+                            <View style = {{flexDirection : 'row', alignItems : 'center', marginBottom : 10}}>
+                                <Text style = {{color : 'red', fontSize : 15}}>This appliance is energy inefficient!</Text>
+                                <Icon style = {{marginLeft : 5,}} size={24} color={"red"} name={"thumbs-down"} />
+                            </View> }
+
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
                                 onPress={() => this.handleEdit()}
@@ -347,4 +391,12 @@ const styles = StyleSheet.create({
     helpTitleText: {
         fontSize : 30
     },
+    closeButton : {
+        alignItems : "center",
+        justifyContent : "center",
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        right : 15,
+        top : 15,
+    }
 });

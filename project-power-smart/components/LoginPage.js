@@ -1,7 +1,7 @@
 import {Alert, Button, Image, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import React from "react";
-import styles from "../AppStyling"
+import styles from "../StyleSheets/AppStyling"
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import loginStyles from '../StyleSheets/loginStyles'
 
