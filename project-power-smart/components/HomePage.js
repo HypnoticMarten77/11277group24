@@ -225,7 +225,7 @@ export default class homePage extends React.Component{
                     <View style={homePageStyles.centeredView}>
                         <View style={homePageStyles.modalView}>
                             <Text style = {homePageStyles.helpTitleText}>Home Screen</Text>
-                            <Text>Rich descriptive words that puts a picture of a person, place, or an object in a readers mind. When a person is writing a descriptive piece, there should be very detailed observations, write what you see in your mind. All parts should be equal. The more detail the better the story. You should start at one point and move in one direction as not to confuse the audience. Such as clock wise, left to right, top to bottom. The reader should be able to envision the picture that you had in your mind as the writer.</Text>
+                            <Text>On this screen you can track your monthly power bill cost.  Add a new power bill by inputting the month, abbreviated or not, and the price of that month's bill.  To remove a month's bill cost, you can type in the corresponding month.  This will clear that month's bill cost.</Text>
                             <Pressable onPress = {() => this.setHelpVisible(!helpVisible)}>
                                 <SimpleLineIcons name={"close"} color={"gray"} size={40} />
                             </Pressable>
@@ -261,8 +261,8 @@ export default class homePage extends React.Component{
 
                 <View style={{
                     flexDirection: 'row',
-                    marginTop : 50,
-                    marginBottom : -50}}>
+                    marginTop : 110,
+                    marginBottom : -60}}>
                     <View style= {{flex : 1}}/>
                         <Pressable style = {this.state.sixMonth ? homePageStyles.monthButtonClicked : homePageStyles.monthButton}
                             onPress={() => {
@@ -290,7 +290,7 @@ export default class homePage extends React.Component{
                 {this.state.addClicked && !this.state.removeClicked && <TextInput
                     style={{
                             padding: 10,
-                            marginTop: 5,
+                            marginBottom: -15,
                             width : 250,
                             textAlign : "center",
                             fontSize : 18
@@ -303,6 +303,7 @@ export default class homePage extends React.Component{
                     style={{
                     padding: 10,
                     marginTop: 5,
+                    marginBottom : -5,
                     width : 250,
                     textAlign : "center",
                     fontSize : 18
@@ -373,8 +374,8 @@ const homePageStyles = StyleSheet.create( {
         justifyContent : "center",
         alignSelf: 'flex-end',
         position: 'absolute',
-        bottom: 330,
-        right : 30,
+        bottom: 260,
+        right : 20,
     },
     monthButtonClicked : {
         backgroundColor: 'lightgray',
@@ -411,6 +412,7 @@ const homePageStyles = StyleSheet.create( {
     },
     button: {
         marginTop : 25,
+        marginBottom : -10,
         backgroundColor: 'white',
         borderRadius: 10,
         borderColor: '#333',

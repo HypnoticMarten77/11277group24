@@ -128,7 +128,7 @@ export default class appliancePage extends Component {
 
         return (
             <View style={styles.container}>
-                <Text style = {styles.titleText}>Appliance Page</Text>
+                <Text style = {styles.titleText}>Appliance List</Text>
                 <TouchableOpacity style = {styles.helpButton} onPress = {() => this.setHelpVisible(!helpVisible)}>
                     <SimpleLineIcons name={"question"} color={"gray"} size={40} />
                 </TouchableOpacity>
@@ -144,7 +144,7 @@ export default class appliancePage extends Component {
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Text style = {styles.helpTitleText}>Appliance Screen</Text>
-                            <Text>Rich descriptive words that puts a picture of a person, place, or an object in a readers mind. When a person is writing a descriptive piece, there should be very detailed observations, write what you see in your mind. All parts should be equal. The more detail the better the story. You should start at one point and move in one direction as not to confuse the audience. Such as clock wise, left to right, top to bottom. The reader should be able to envision the picture that you had in your mind as the writer.</Text>
+                            <Text>On this page you can input each appliance you own by giving them a unique name and inputting their make.  You can then see whether or not your appliance is energy efficient.  To edit or remove an appliance from the table you can press the "View/Edit" button.</Text>
                             <Pressable onPress = {() => this.setHelpVisible(!helpVisible)}>
                                 <SimpleLineIcons name={"close"} color={"gray"} size={40} />
                             </Pressable>
@@ -354,9 +354,10 @@ const styles = StyleSheet.create({
     },
     titleText : {
         fontSize : 50,
-        marginBottom : 40,
+        marginBottom : 10,
         color : "#fff",
         fontFamily : "Futura-Medium",
+        textAlign : "center",
     },
     modalText: {
         marginBottom: 15,
@@ -385,8 +386,8 @@ const styles = StyleSheet.create({
         justifyContent : "center",
         alignSelf: 'flex-end',
         position: 'absolute',
-        bottom: 704,
-        right : 30,
+        bottom : 559,
+        right : 20,
     },
     helpTitleText: {
         fontSize : 30
