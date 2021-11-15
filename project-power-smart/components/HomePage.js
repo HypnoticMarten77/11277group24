@@ -10,7 +10,7 @@ import {
     KeyboardAvoidingView,
     StyleSheet, Modal
 } from "react-native";
-import styles from "../AppStyling"
+import styles from "../StyleSheets/AppStyling"
 import React, { useState } from "react";
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory-native";
 import {Dimensions} from "react-native-web";
@@ -182,7 +182,7 @@ export default class homePage extends React.Component{
     }
     handleClearData = () =>
     {
-        if(this.state.catagory === INITIAL_CATEGORIES_6_MONTH)
+        if(this.state.sixMonth)
             this.setState({chartData : CLEAR_DATA_6_MONTH});
         else
             this.setState({chartData : CLEAR_DATA_1_YEAR});

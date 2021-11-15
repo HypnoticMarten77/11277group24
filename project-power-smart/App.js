@@ -5,6 +5,8 @@ import {createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNav from "./TabRouter"
 import loginPage from "./components/LoginPage";
 import newUserPage from "./components/newUserPage"
+import mapPage from "./components/MapPage";
+import locationPage from "./components/locationPage";
 
 /*const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://mquinn:<ufl.edu>@cluster0.rnkhx.mongodb.net/test?retryWrites=true&w=majority";
@@ -27,6 +29,8 @@ function App() {
                 <Stack.Screen name="Login" component={loginPage} />
                 <Stack.Screen name="NewUser" component={newUserPage} />
                 <Stack.Screen name = "Tab" component = {TabNav} />
+                <Stack.Screen name = "Location" component = {locationPage}/>
+                <Stack.Screen name = "Map" component = {mapPage}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

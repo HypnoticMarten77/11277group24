@@ -11,7 +11,7 @@ import {
     Pressable, Modal
 } from "react-native";
 import React, { useState } from "react";
-import styles from "../AppStyling"
+import styles from "../StyleSheets/AppStyling"
 import ModalDropdown from 'react-native-modal-dropdown';
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 const windowWidth = Dimensions.get('window').width;
@@ -231,13 +231,16 @@ const stylesTips = StyleSheet.create({
     titleText : {
         height : 30,
         fontSize : 23,
-        marginBottom : 10
+        marginBottom : 10,
+        color : "#202c4a",
+
     },
     descriptionText : {
         fontSize : 15,
         height : 120,
         width : windowWidth - 40,
-        textAlign : "center"
+        textAlign : "center",
+        color : "#202c4a",
     },
     refreshImage : {
         marginTop : 50,
