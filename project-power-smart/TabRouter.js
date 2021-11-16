@@ -19,7 +19,7 @@ const screenOptions = (route, color) => {
             iconName = 'bulb';
             break;
         case 'Appliances':
-            iconName = 'energy';
+            iconName = 'printer';
             break;
         case 'Efficient':
             iconName = 'energy';
