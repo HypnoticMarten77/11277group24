@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import styles from "../StyleSheets/AppStyling"
 import ModalDropdown from 'react-native-modal-dropdown';
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-const windowWidth = Dimensions.get('window').width;
+const screenWidth = Dimensions.get('window').width;
 
 const applianceTips = [
     {header: "Wash laundry cold", description: "By switching from hot to cold water for an average of three loads per week, " +
@@ -253,7 +253,7 @@ const stylesTips = StyleSheet.create({
     descriptionText : {
         fontSize : 15,
         height : 120,
-        width : windowWidth - 40,
+        width : screenWidth - 40,
         textAlign : "center",
         color : "#202c4a",
     },
@@ -270,7 +270,7 @@ const stylesTips = StyleSheet.create({
         justifyContent : "center",
         alignSelf: 'flex-end',
         position: 'absolute',
-        bottom: 559,
+        bottom : screenWidth*1.73,
         right : 20,
     },
     centeredView: {

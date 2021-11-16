@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert , Modal, Pressable, TextInput} from 'react-native';
+import {Dimensions, StyleSheet, View, Text, ScrollView, TouchableOpacity, Modal, Alert, Pressable} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import ModalDropdown from 'react-native-modal-dropdown';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+
+
+const screenWidth = Dimensions.get('window').width;
+
+const screenHeight = Dimensions.get('window').height;
 
 const refrigerator = [
     ['Refrigerator','Fisher & Paykel'],
@@ -156,9 +160,12 @@ export default class efficientPage extends Component {
             index : -1,
             isGeneral: true,
             category: 0,
+            helpVisible : false,
         }
     }
-
+    setHelpVisible = (visible) => {
+        this.setState({ helpVisible: visible });
+    }
     handleSelect = (text) =>
     { 
         let x = parseInt(text);
@@ -227,34 +234,62 @@ export default class efficientPage extends Component {
 
 
     render(){
+        const { helpVisible } = this.state;
+
         return (
             <View style={styles.container}>
-                <Text style = {styles.titleText}>Suggested Efficent Products</Text>
+                <TouchableOpacity style = {styles.helpButton} onPress = {() => this.setHelpVisible(!helpVisible)}>
+                    <SimpleLineIcons name={"question"} color={"gray"} size={40} />
+                </TouchableOpacity>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={helpVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        this.setHelpVisible(!helpVisible);
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style = {styles.helpTitleText}>Efficient Products Screen</Text>
+                            <Text>On this page you can input each appliance you own by giving them a unique name and inputting their make.  You can then see whether or not your appliance is energy efficient.  To edit or remove an appliance from the table you can press the "View/Edit" button.</Text>
+                            <Pressable onPress = {() => this.setHelpVisible(!helpVisible)}>
+                                <SimpleLineIcons name={"close"} color={"gray"} size={40} />
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+                <Text style = {styles.titleText}>Suggested Efficient Products</Text>
                 <Text style = {styles.dropDownTextDefaultVal}>Select A Category</Text>
-                <ModalDropdown options={['Air Conditioner', 'Ceiling Fan', 'Dehumidifier', 'Dishwasher','Dryer', 'Freezer', 'Heat pump','Refrigerator', 'Ventilating Fan', 'Washer']}
-                defaultValue = "Washer"
-                animated = {true}
-                textStyle = {styles.dropDownTextDefaultVal}
-                dropdownTextStyle = {styles.dropDownText}
-                onSelect = {(text) =>this.handleSelect(text)}>
-                </ModalDropdown>
+                <View style = {{alignItems : 'center', marginBottom : 10,}}>
+                    <ModalDropdown options={['Air Conditioner', 'Ceiling Fan', 'Dehumidifier', 'Dishwasher','Dryer', 'Freezer', 'Heat pump','Refrigerator', 'Ventilating Fan', 'Washer']}
+                                   defaultValue = "Washer"
+                                   animated = {true}
+                                   textStyle = {styles.dropDownTextDefaultVal}
+                                   dropdownTextStyle = {styles.dropDownText}
+                                   onSelect = {(text) =>this.handleSelect(text)}>
+                    </ModalDropdown>
+                </View>
 
 
-                <Table borderStyle={{borderColor: 'transparent'}}>
-                    <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
-                    {
-                        this.state.tableData.map((rowData, index) => (
-                            <TableWrapper key={index} style={styles.row}>
-                                {
-                                    rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 2 ? element(cellData, index) : cellData} textStyle={styles.text}/>
-                                    ))
-                                }
-                            </TableWrapper>
-                        ))
-                    }
-                </Table>
-
+                <ScrollView style = {{height : screenHeight / 3, marginBottom : 100}}
+                          >
+                    <Table borderStyle={{borderColor: 'transparent'}}>
+                        <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
+                        {
+                            this.state.tableData.map((rowData, index) => (
+                                <TableWrapper key={index} style={styles.row}>
+                                    {
+                                        rowData.map((cellData, cellIndex) => (
+                                            <Cell key={cellIndex} data={cellIndex === 2 ? element(cellData, index) : cellData} textStyle={styles.text}/>
+                                        ))
+                                    }
+                                </TableWrapper>
+                            ))
+                        }
+                    </Table>
+                </ScrollView>
             </View>
         )
     }
@@ -269,6 +304,7 @@ const styles = StyleSheet.create({
         justifyContent : "center",
     },
     titleText : {
+        marginTop : 100,
         fontSize : 50,
         marginBottom : 10,
         color : "#fff",
@@ -281,11 +317,45 @@ const styles = StyleSheet.create({
     dropDownTextDefaultVal : {
         fontSize : 20,
         color : "gray",
-        textAlign : "center"
+        textAlign : "center",
+
     },
     dropDownText : {
         fontSize : 15,
         width : 150,
         textAlign : "center",
-    }
+    },
+    helpButton : {
+        height : 40,
+        width : 40,
+        borderRadius : 100,
+        alignItems : "center",
+        justifyContent : "center",
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        bottom : screenWidth * 1.73,
+        right : 20,
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+    },
+    helpTitleText: {
+        fontSize : 30,
+        textAlign : 'center'
+    },
 });
