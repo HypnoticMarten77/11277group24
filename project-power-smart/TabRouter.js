@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import appliancePage from "./components/AppliancePage";
+import efficientPage from "./components/EfficientPage";
 import homePage from "./components/HomePage";
 import dailyTipsPage from "./components/TipsPage";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,6 +19,9 @@ const screenOptions = (route, color) => {
             iconName = 'bulb';
             break;
         case 'Appliances':
+            iconName = 'energy';
+            break;
+        case 'Efficient':
             iconName = 'energy';
             break;
         case 'Map':
@@ -40,6 +44,7 @@ const TabNav = ({route, navigation}) => {
             <Tab.Screen name="Home" component={homePage}  />
             <Tab.Screen name="Tips" component={dailyTipsPage} />
             <Tab.Screen name="Appliances" component={appliancePage} />
+            <Tab.Screen name="Efficient" component={efficientPage} />
             <Tab.Screen name="Map" component={mapContainer} />
         </Tab.Navigator>
     );
