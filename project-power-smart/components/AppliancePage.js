@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert , Modal, Pressable, TextInput} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert , Modal, Pressable, TextInput, Dimensions} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
+const screenWidth = Dimensions.get('window').width;
 
 const energyEfficientData = [
     ['Dishwasher', 'BLACK+DECKER'],
@@ -631,7 +633,7 @@ const styles = StyleSheet.create({
         justifyContent : "center",
         alignSelf: 'flex-end',
         position: 'absolute',
-        bottom : 559,
+        bottom : screenWidth * 1.73,
         right : 20,
     },
     helpTitleText: {
@@ -644,5 +646,5 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right : 15,
         top : 15,
-    }
+    },
 });

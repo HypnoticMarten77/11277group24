@@ -13,7 +13,7 @@ import {
 import styles from "../StyleSheets/AppStyling"
 import React, { useState } from "react";
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory-native";
-import {Dimensions} from "react-native-web";
+import { Dimensions } from 'react-native'
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 const INITIAL_STATE_6_MONTH = [
     {x: "Jan", y: 1},
@@ -65,7 +65,7 @@ const INITIAL_CATEGORIES_6_MONTH = [
 const INITIAL_CATEGORIES_1_YEAR = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ]
-const screenHeight = Dimensions.get('window').height - 56;
+const screenWidth = Dimensions.get('window').width;
 
 const grayStyle1Year = {
     axis: { stroke: "gray" },
@@ -374,7 +374,7 @@ const homePageStyles = StyleSheet.create( {
         justifyContent : "center",
         alignSelf: 'flex-end',
         position: 'absolute',
-        bottom: 260,
+        bottom : screenWidth / 1.3,
         right : 20,
     },
     monthButtonClicked : {
