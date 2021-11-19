@@ -1,3 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `<loginPage />`;
+
+exports[`renders text 1`] = `
+<Image
+  source={
+    Object {
+      "testUri": "../../../assets/powersmart.png",
+    }
+  }
+  style={
+    Object {
+      "height": 200,
+      "marginTop": -50,
+      "resizeMode": "contain",
+      "width": 200,
+    }
+  }
+/>
+`;

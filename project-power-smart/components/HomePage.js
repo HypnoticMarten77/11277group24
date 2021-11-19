@@ -59,6 +59,7 @@ const CLEAR_DATA_1_YEAR = [
     {x: "Nov", y: 0},
     {x: "Dec", y: 0},
 ]
+
 const INITIAL_CATEGORIES_6_MONTH = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun"
 ]
