@@ -1,4 +1,4 @@
-## Table of Conents:
+## Table of Contents:
 ### Introduction
 ### Installation
 ### Usage
@@ -101,7 +101,7 @@ Each of these pages can be edited to change what appears on their respective pag
 ```
 <Text> Hello CEN3031</Text>
 ```
-Text is wrapped in <Text> components, but inlcuding other features like <Button>, <View>, etc. can be used as well, reference the [React Native Docs](https://reactnative.dev/docs/getting-started) to learn more about this.
+Text is wrapped in <Text> components, but inlcuding other features like Button, View, etc. can be used as well, reference the [React Native Docs](https://reactnative.dev/docs/getting-started) to learn more about this.
 
 To **create a new page or remove a new page** in the tab navigator, a few steps must be taken. Firstly, create a new page within the components folder, and make sure to export the page. An example could look like this:
 
